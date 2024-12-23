@@ -1,6 +1,8 @@
 ## CodeGator.Validations: 
 ---
 
+[![Build Status](https://dev.azure.com/codegator/CodeGator.Validations/_apis/build/status%2FCodeGator.CodeGator.Validations?branchName=main)](https://dev.azure.com/codegator/CodeGator.Validations/_build/latest?definitionId=109&branchName=main)
+
 #### What does it do?
 This package contains parameter validations used by other CodeGator solutions.
 
