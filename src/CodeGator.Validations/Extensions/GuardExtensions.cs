@@ -1486,6 +1486,64 @@ public static partial class GuardExtensions
 
     /// <summary>
     /// This method throws an exception if the <paramref name="argValue"/> 
+    /// argument contains an empty TimeSpan instance.
+    /// </summary>
+    /// <param name="guard">The guard to use for the operation.</param>
+    /// <param name="argValue">The argument to test.</param>
+    /// <param name="argName">The name of the argument.</param>
+    /// <param name="memberName">Not used. Supplied by the compiler.</param>
+    /// <param name="sourceFilePath">Not used. Supplied by the compiler.</param>
+    /// <param name="sourceLineNumber">Not used. Supplied by the compiler.</param>
+    /// <returns>The <paramref name="guard"/> value.</returns>
+    /// <exception cref="ArgumentException">This exception is thrown when
+    /// the <paramref name="argValue"/> argument contains an empty GUID.
+    /// </exception>
+    /// <example>
+    /// This example shows how to call the <see cref="GuardExtensions.ThrowIfEmptyTimeSpan(Guard, TimeSpan, string, string, string, int)"/>
+    /// method.
+    /// <code>
+    /// class TestClass
+    /// {
+    ///     static void Main()
+    ///     {
+    ///         // make an invalid argument.
+    ///         var arg = TimeSpan.Zero;
+    /// 
+    ///         // throws an exception, since the time span is empty.
+    ///         Guard.Instance().ThrowIfEmptyTimeSpan(arg, nameof(arg));
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public static Guard ThrowIfEmptyTimeSpan(
+        this Guard guard,
+        TimeSpan argValue,
+        string argName,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string sourceFilePath = "",
+        [CallerLineNumber] int sourceLineNumber = 0
+        )
+    {
+        if (argValue == TimeSpan.Zero)
+        {
+            var exception = new ArgumentException(
+                paramName: argName,
+                message: $"The argument may not contain an empty time span!"
+                );
+
+            exception.Data["memberName"] = memberName;
+            exception.Data["sourceLineNumber"] = sourceLineNumber;
+            exception.Data["sourceFilePath"] = sourceFilePath;
+
+            throw exception;
+        }
+        return guard;
+    }
+
+    // ******************************************************************
+
+    /// <summary>
+    /// This method throws an exception if the <paramref name="argValue"/> 
     /// argument does not contain an empty GUID instance.
     /// </summary>
     /// <param name="guard">The guard to use for the operation.</param>
@@ -1530,6 +1588,65 @@ public static partial class GuardExtensions
             var exception = new ArgumentException(
                 paramName: argName,
                 message: $"The argument should contain an empty GUID!"
+                );
+
+            exception.Data["memberName"] = memberName;
+            exception.Data["sourceLineNumber"] = sourceLineNumber;
+            exception.Data["sourceFilePath"] = sourceFilePath;
+
+            throw exception;
+        }
+        return guard;
+    }
+
+    // ******************************************************************
+
+    /// <summary>
+    /// This method throws an exception if the <paramref name="argValue"/> 
+    /// argument does not contain an empty TimeSpan instance.
+    /// </summary>
+    /// <param name="guard">The guard to use for the operation.</param>
+    /// <param name="argValue">The argument to test.</param>
+    /// <param name="argName">The name of the argument.</param>
+    /// <param name="memberName">Not used. Supplied by the compiler.</param>
+    /// <param name="sourceFilePath">Not used. Supplied by the compiler.</param>
+    /// <param name="sourceLineNumber">Not used. Supplied by the compiler.</param>
+    /// <returns>The <paramref name="guard"/> value.</returns>
+    /// <exception cref="ArgumentException">This exception is thrown when
+    /// the <paramref name="argValue"/> argument does not contain an 
+    /// empty GUID.
+    /// </exception>
+    /// <example>
+    /// This example shows how to call the <see cref="GuardExtensions.ThrowIfNotEmptyTimeSpan(Guard, TimeSpan, string, string, string, int)"/>
+    /// method.
+    /// <code>
+    /// class TestClass
+    /// {
+    ///     static void Main()
+    ///     {
+    ///         // make an invalid argument.
+    ///         var arg = TimeSpan.Parse("some time span value");
+    /// 
+    ///         // throws an exception, since the time span is not empty.
+    ///         Guard.Instance().ThrowIfNotEmptyTimeSpan(arg, nameof(arg));
+    ///     }
+    /// }
+    /// </code>
+    /// </example>
+    public static Guard ThrowIfNotEmptyTimeSpan(
+        this Guard guard,
+        TimeSpan argValue,
+        string argName,
+        [CallerMemberName] string memberName = "",
+        [CallerFilePath] string sourceFilePath = "",
+        [CallerLineNumber] int sourceLineNumber = 0
+        )
+    {
+        if (argValue != TimeSpan.Zero)
+        {
+            var exception = new ArgumentException(
+                paramName: argName,
+                message: $"The argument should contain an empty time span!"
                 );
 
             exception.Data["memberName"] = memberName;
