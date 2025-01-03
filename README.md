@@ -3,6 +3,10 @@
 
 [![Build Status](https://dev.azure.com/codegator/CodeGator.Validations/_apis/build/status%2FCodeGator.CodeGator.Validations?branchName=main)](https://dev.azure.com/codegator/CodeGator.Validations/_build/latest?definitionId=109&branchName=main)
 
+![NuGet Version](https://img.shields.io/nuget/v/CodeGator.Validations)
+
+![NuGet Downloads](https://img.shields.io/nuget/dt/CodeGator.Validations)
+
 #### What does it do?
 This package contains parameter validations used by other CodeGator solutions.
 
